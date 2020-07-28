@@ -6,28 +6,34 @@
         </div>
         <div class="module outline-border">
             <ul class="and-grade" id="contentlist">
-                <li class="apply-for-subsidies tiaozhuan">
-                    <router-link to="/profile/data">
+                <router-link to="/studydata" class="apply-for-subsidies tiaozhuan">
+                    <div>
                         <img src="http://h5.danengshou.com/img/learn-date.png" alt="">&nbsp;&nbsp;
                         <span class="rapid-development">学习数据</span>
                         <i class="iconfont icon-you right-arrow"></i>
-                    </router-link>
-                </li>
-                <li class="apply-for-subsidies tiaozhuan">
-                    <img src="http://h5.danengshou.com/img/learnJilv.png" alt="">&nbsp;&nbsp;
-                    <span class="rapid-development">学习记录</span>
-                    <i class="iconfont icon-you right-arrow"></i>
-                </li>
-                <li class="apply-for-subsidies tiaozhuan">
-                    <img src="http://h5.danengshou.com/img/learnAchive.png" alt="">&nbsp;&nbsp;
-                    <span class="rapid-development">学习成就</span>
-                    <i class="iconfont icon-you right-arrow"></i>
-                </li>
-                <li class="apply-for-subsidies tiaozhuan">
-                    <img src="http://h5.danengshou.com/img/personAlone.png" alt="">&nbsp;&nbsp;
-                    <span class="rapid-development">个人设置</span>
-                    <i class="iconfont icon-you right-arrow"></i>
-                </li>
+                    </div>
+                </router-link>
+                <router-link to="/studyrecord" class="apply-for-subsidies tiaozhuan">
+                    <div>
+                        <img src="http://h5.danengshou.com/img/learnJilv.png" alt="">&nbsp;&nbsp;
+                        <span class="rapid-development">学习记录</span>
+                        <i class="iconfont icon-you right-arrow"></i>
+                    </div>
+                </router-link>
+                <router-link to="/studyachi" class="apply-for-subsidies tiaozhuan">
+                    <div>
+                        <img src="http://h5.danengshou.com/img/learnAchive.png" alt="">&nbsp;&nbsp;
+                        <span class="rapid-development">学习成就</span>
+                        <i class="iconfont icon-you right-arrow"></i>
+                    </div>
+                </router-link>
+                <router-link to="/setting" class="apply-for-subsidies tiaozhuan">
+                    <div>
+                        <img src="http://h5.danengshou.com/img/personAlone.png" alt="">&nbsp;&nbsp;
+                        <span class="rapid-development">个人设置</span>
+                        <i class="iconfont icon-you right-arrow"></i>
+                    </div>
+                </router-link>
             </ul>
             <div class="rapid-development rapid-development-out" id="logOut">
                 <i class="iconfont icon-tuichu"></i>&nbsp;&nbsp;退出登录
@@ -91,8 +97,10 @@ export default {
         .apply-for-subsidies {
             width: 100%;
             height: 64px;
-            border-bottom: 1px solid #ccc;
             line-height: 64px;
+            div{
+                border-bottom: 1px solid #ccc;
+            }
             .rapid-development {
                 font-size: 15px;
                 text-decoration: none;

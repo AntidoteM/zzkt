@@ -1,11 +1,11 @@
 <template>
     <div class="navbar">
-        <div class="page-nav-operate page-nav-back">
+        <div class="page-nav-operate page-nav-back" @click="back()">
             <i class="iconfont icon-fanhui"></i>
         </div>
-        <div class="page-nav-operate page-nav-search">
+        <!-- <div class="page-nav-operate page-nav-search">
             <i class="iconfont icon-sousuo"></i>
-        </div>
+        </div> -->
         <div class="title">
             <slot name='title'></slot>
         </div>
@@ -33,7 +33,9 @@ export default {
         
     },
     methods: {
-
+        back(){
+            this.$router.go(-1)
+        }
     }
 }
 </script>
@@ -42,15 +44,20 @@ export default {
     .navbar{
         overflow: hidden;
         background: #2e87ff;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 999;
     }
     .page-nav-operate {
-        width: 90px;
-        height: 90px;
+        width: 45px;
+        height: 45px;
         color: #ffffff;
         text-align: center;
         .iconfont {
-            font-size: 30px;
-            line-height: 90px;
+            font-size: 16px;
+            line-height: 45px;
         }
     }
     .page-nav-back{
@@ -61,9 +68,9 @@ export default {
     }
     .title{
         color: white;
-        font-size: 42px;
-        line-height: 90px;
-        padding: 0 90px;
+        font-size: 16px;
+        line-height: 45px;
+        padding: 0 45px;
         text-align: center;
         background: #2e87ff;
     }

@@ -15,15 +15,9 @@ const routes = [
                 component: () => import('../views/home/home/index')
             },
             {
-                path: 'profile',
+                path: '/profile',
                 name: 'profile',
-                component: () => import('../views/home/profile/index'),
-                children: [
-                    {
-                        path: '/data',
-                        component: () => import('../views/home/profile/studydata/index')
-                    },
-                ]
+                component: () => import('../views/home/profile/index')
             },
             {
                 path: 'news',
@@ -41,7 +35,28 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: () => import('../views/login/login')
-    }
+    },
+    {
+        path: '/studydata',
+        component: () => import('../views/home/profile/studydata/index')
+    },
+    {
+        path: '/studyrecord',
+        component: () => import('../views/home/profile/studyrecord/index')
+    },
+    {
+        path: '/studyachi',
+        component: () => import('../views/home/profile/studyachi/index')
+    },
+    {
+        path: '/setting',
+        component: () => import('../views/home/profile/setting/index')
+    },
+	{
+        path: '/Vid_details',
+        name: 'Vid_details',
+        component: () => import('../views/pay_video/video_details')
+    },
 ]
 
 const router = new VueRouter({

@@ -1,0 +1,177 @@
+.border-none-bottom {
+    border-bottom: none !important;
+}
+.Essential-information-1 {
+    padding: 15px 10px;
+    border-bottom: 1 solid #999;
+}
+.common-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    div:nth-of-type(1) {
+        position: relative;
+        padding-left: 10px;
+        &:after {
+            position: absolute;
+            content: "";
+            width: 5px;
+            height: 15px;
+            background: #7F7F7F;
+            top: 2px;
+            left: -5px;
+        }
+    }
+    img {
+        width: 15px;
+        height: 10px;
+        margin-left: 10px;
+    }
+    .test-inverse {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transition: transform .5s;
+    }
+}
+.test-inverseNormal {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transition: transform .5s;
+}
+.material-setting_form{
+    padding-bottom: 40px;
+}
+.material-setting_form-wrapper {
+    margin: 15px 0;
+    position: relative;
+    .material-setting_form-label {
+        font-size: 15px;
+        padding: 10px 0;
+        width: 25%;
+        text-align: right;
+        display: inline-block;
+    }
+    .material-setting-wrapper {
+        margin-left: 45px;
+    }
+    .material-setting__uploading {
+        width: 90px;
+        height: 70px;
+        cursor: pointer;
+        border-radius: 5px;
+        float: left;
+        img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 5px;
+        }
+    }
+}
+.material-setting_form-wrapper{
+    input.flie_upload {
+        position: absolute;
+        top: 35px;
+        left: 45px;
+        width: 90px;
+        height: 70px;
+        z-index: 1;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .touxiang_text {
+        font-size: 12px;
+        color: #AFAFAF;
+        display: block;
+        margin-left: 150px;
+    }
+    .touxiang_btn {
+        background: #fff;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-size: 12px;
+        width: 100px;
+        height: 35px;
+        margin-left: 20px;
+    }
+    .material-setting_form-input {
+        border: none;
+        outline: none;
+        border: 1px solid #CCCCCC;
+        height: 35px;
+        font-size: 15px;
+        width: 70%;
+        text-indent: 20px;
+        line-height: 25px;
+    }
+    .radio {
+        padding-left: 10px;
+        font-size: 10px;
+    }
+    .userTypeMain {
+        width: 70%;
+        outline: none;
+        border: 1px solid #CCCCCC !important;
+        height: 35px;
+        font-size: 11px;
+        text-indent: 20px;
+    }
+    #userType{
+        width: 70%;
+        outline: none;
+        border: 1px solid #CCCCCC !important;
+        height: 35px;
+        font-size: 11px;
+        text-indent: 20px;
+    }
+    .choose_city{
+        width: 22%;
+        margin-right: 2%;
+        border: 1px solid #CCCCCC !important;
+        height: 35px;
+        font-size: 11px;
+    }
+}
+.flex_show {
+    display: flex;
+}
+.preview {
+    display: inline-block;
+    width: 96px;
+    height: 96px;
+    position: relative;
+    background-image: url('http://h5.danengshou.com/img/addsfz.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 20px;
+    .file {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        cursor: pointer;
+        z-index: 5;
+    }
+}
+.preservation_form-wrapper {
+  width: 95%;
+  position: fixed;
+  bottom: 0;
+  margin-left: 2.5%;
+  .preservation_btn {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 40px;
+    background: #027fdd;
+    color: #fff;
+    font-size: 15px;
+  }
+}
+.layui-form-item select{
+    width: 100%;
+    border: 1px solid #CCCCCC;
+}
