@@ -9,25 +9,23 @@
         style="margin-left: 5px;position: absolute;left: 5px;top: 8px;"
       />
       <h3 class="page-nav-title">
-        <div class="search">
+        <!-- <div class="search">
           <form action>
             <input type="text" class="sreachs" id placeholder="请输入要搜索的内容" />
           </form>
-        </div>
+        </div> -->
+        <div>智造课堂</div>
       </h3>
     </div>
     <div class="page-container index-container">
       <div class="module-top">
         <div class="swiper-container">
           <swiper :options="swiperOptions">
-            <swiper-slide>
+            <swiper-slide v-for="(item,index) in banners" :key="index">
               <div class="pic">
-                <img src="http://h5.danengshou.com/img/3759440a79f80e08f5bc9a677ea0ae.jpg" alt />
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="pic">
-                <img src="http://h5.danengshou.com/img/link_Js.png" alt />
+                <a :href="item.links">
+                  <img :src="item.img_src" alt />
+                </a>
               </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -36,14 +34,8 @@
       </div>
       <div class="module">
         <div class="racelist">
-          <div>
-            <img src="../../../assets/img/1592992525(1).jpg" />
-          </div>
-          <div>
-            <img src="../../../assets/img/1592992557(1).jpg" />
-          </div>
-          <div>
-            <img src="../../../assets/img/1592992583(1).jpg" />
+          <div v-for="(item,index) in games" :key="index" @click="togame(item.id)">
+            <img :src="item.img_src" />
           </div>
         </div>
       </div>
@@ -51,164 +43,34 @@
       <div class="news b">
         <div class="title">新闻动态</div>
         <ul class="list">
-          <li>
-            <img src="../../../assets/img/1592992583(1).jpg" />
+          <li v-for="(item, index) in articles" :key='index' @click="tonewsdetail(item.id)">
+            <img :src="item.img_src" />
             <div class="info">
-              <p class="title">传理想汽车将获5.5亿美元D轮融资美团领投双方回应</p>
-              <span class="type">通知公告</span>
-              <span class="time">2020-6-10</span>
-            </div>
-          </li>
-          <li>
-            <img src="../../../assets/img/1592992583(1).jpg" />
-            <div class="info">
-              <p class="title">传理想汽车将获5.5亿美元D轮融资美团领投双方回应</p>
-              <span class="type">通知公告</span>
-              <span class="time">2020-6-10</span>
-            </div>
-          </li>
-          <li>
-            <img src="../../../assets/img/1592992583(1).jpg" />
-            <div class="info">
-              <p class="title">传理想汽车将获5.5亿美元D轮融资美团领投双方回应</p>
-              <span class="type">通知公告</span>
-              <span class="time">2020-6-10</span>
-            </div>
-          </li>
-          <li>
-            <img src="../../../assets/img/1592992583(1).jpg" />
-            <div class="info">
-              <p class="title">传理想汽车将获5.5亿美元D轮融资美团领投双方回应</p>
-              <span class="type">通知公告</span>
-              <span class="time">2020-6-10</span>
-            </div>
-          </li>
-          <li>
-            <img src="../../../assets/img/1592992583(1).jpg" />
-            <div class="info">
-              <p class="title">传理想汽车将获5.5亿美元D轮融资美团领投双方回应</p>
-              <span class="type">通知公告</span>
-              <span class="time">2020-6-10</span>
+              <p class="title">{{item.title}}</p>
+              <span class="type">{{item.cate.name}}</span>
+              <span class="time">{{item.updated_at | date}}</span>
             </div>
           </li>
         </ul>
       </div>
       <hr />
       <div class="curriculum">
-        <div class="title">培训课程</div>
-        <div class="list">
-          <div class="item">
+        <div class="title">赛前培训</div>
+        <div class="list" style="padding-top: 10px">
+          <div class="item" v-for="(item,index) in cates" :key="index">
             <div class="stitle">
-              技能
-              <a href="http://gaosaiedu.wangdoukeji.com/train" class="more">更多视频&gt;&gt;</a>
+              {{item.name}}
+              <a href='' class="more" @click="toclasses">更多视频&gt;&gt;</a>
             </div>
             <ul>
-              <li>
-                <div class="type">汽车维修工</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <li>
-                <div class="type">123</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <li>
-                <div class="type">123</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <div class="clr"></div>
-            </ul>
-          </div>
-          <div class="item">
-            <div class="stitle">
-              技能
-              <a class="more">更多视频&gt;&gt;</a>
-            </div>
-            <ul>
-              <li>
-                <div class="type">汽车维修工</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <li>
-                <div class="type">123</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <li>
-                <div class="type">123</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <div class="clr"></div>
-            </ul>
-          </div>
-          <div class="item f4-item">
-            <div class="stitle">
-              技能
-              <a class="more">更多视频&gt;&gt;</a>
-            </div>
-            <ul>
-              <li>
-                <div class="type">汽车维修工</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <li>
-                <div class="type">123</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <li>
-                <div class="type">123</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
-                </div>
-              </li>
-              <li>
-                <div class="type">123</div>
-                <img src="http://gaosaiedu.wangdoukeji.com/home/img/lgRegBg.jpg" />
-                <div class="content">
-                  <p>title</p>
-                  <span>共0课时</span>
-                  <span style="float: right;">123</span>
+              <li v-for="(sonitem,sonindex) in item.son" :key="sonindex">
+                <div v-for="(son2item,son2index) in sonitem.son" :key="son2index" @click="tovideodetail(son2item.id)">
+                  <div class="type">{{sonitem.name}}</div>
+                  <img :src="son2item.img_src" />
+                  <div class="content">
+                    <p>{{son2item.title}}</p>
+                    <span>共{{son2item.video_count}}课时</span>
+                  </div>
                 </div>
               </li>
               <div class="clr"></div>
@@ -218,11 +80,20 @@
       </div>
       <hr />
       <div class="newpei b">
-        <div class="title">培训课程</div>
+        <div class="title">新职业培训</div>
         <div class="list">
-          <img src="../../../assets/img/1592992525(1).jpg" />
-          <img src="../../../assets/img/1592992525(1).jpg" />
+          <a href="" v-for="(item,index) in newscates" :key="index" style="display: inline-block;width: 40%;">
+            <img :src="item.img_src" />
+          </a>
         </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <div class="wrapper">
+        <div class="qrcode" style="text-align:center">
+          <img :src="about" />
+        </div>
+        <div class="clr"></div>
       </div>
     </div>
   </div>
@@ -234,18 +105,59 @@ export default {
     return {
       swiperOptions: {
         pagination: {
-          el: ".swiper-pagination"
+          el: ".swiper-pagination",
         },
-        autoplay: true
-      }
+        autoplay: true,
+      },
+      banners: [],
+      articles: [],
+      games: [],
+      cates: [],
+      newscates: [],
+      about: ''
     };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.$axios.get('/index').then((res)=>{
+      let data = res.data.data;
+      console.log(data)
+      if(res.data.status == 200){
+        this.banners = data.banner
+        this.articles = data.article
+        this.games = data.game
+        this.cates = data.cate
+        this.newscates = data.newscate
+        this.about = data.about
+      }
+    })
+  },
+  filters: {
+    date: function(value){
+      let date = new Date(value)
+      let year = date.getFullYear()
+      let month = date.getMonth()+1
+      let day = date.getDay()
+      return year+'-'+month+'-'+day
+    }
+  },
+  methods: {
+    toclasses(){
+      this.$router.push({path: '/classes'})
+    },
+    togame(id){
+      this.$router.push({path:`/competition/${id}`})
+    },
+    tovideodetail(id){
+      this.$router.push({path: `/Vid_details/${id}`})
+    },
+    tonewsdetail(id){
+      this.$router.push({path: `/news_details/${id}`})
+    }
+  },
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .page-navbar {
   height: 45px;
   border-bottom: 1px solid #e9e9e9;
@@ -272,7 +184,7 @@ export default {
 .page-container {
   box-sizing: border-box;
   width: 100%;
-  margin-bottom: 60px;
+  margin-bottom: 10px;
   .module {
     padding: 5px 0px;
     box-shadow: 0px 20px 20px 0px rgba(20, 109, 255, 0.2),
@@ -312,14 +224,14 @@ export default {
         padding-top: 10px;
         img {
           width: 100px;
-          height: 82px;
+          vertical-align: middle;
         }
         .info {
           padding: 10px;
           display: inline-block;
-          vertical-align: top;
           width: calc(100% - 100px);
           box-sizing: border-box;
+          vertical-align: middle;
         }
         .time {
           color: #000000;
@@ -360,7 +272,7 @@ export default {
       .stitle {
         padding-bottom: 2px;
         border-bottom: 1px solid #269abc;
-        font-size: 15px;
+        font-size: 12px;
         a {
           font-size: 12px;
           float: right;
@@ -374,8 +286,9 @@ export default {
           overflow: hidden;
           float: left;
           box-sizing: border-box;
-          width: 30%;
-          margin-left: 2.5%;
+          width: 45.5%;
+          margin-left: 3%;
+          margin-bottom: 10px;
           border: 1px solid #dcdcdc;
           border-radius: 10px;
           position: relative;
@@ -383,19 +296,18 @@ export default {
           .type {
             position: absolute;
             line-height: 20px;
-            top: 18%;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 0;
+            left: 0;
             background-color: rgba(0, 0, 255, 0.5);
-            border: 1px solid #ffffff;
-            box-shadow: 0 0 0 10px rgba(0, 0, 255, 0.5);
             padding: 0px 5px;
             font-size: 10px;
             color: #ffffff;
             white-space: nowrap;
+            text-align: left;
           }
           img {
             width: 100%;
+            height: 82px;
           }
           .content {
             padding: 5px;
@@ -413,31 +325,31 @@ export default {
           clear: both;
         }
       }
-      .f4-item ul li {
-        overflow: hidden;
-        float: left;
-        box-sizing: border-box;
-        width: 24%;
-        margin-left: 1%;
-        border: 1px solid #dcdcdc;
-        border-radius: 10px;
-        position: relative;
-        transition: all 0.6s;
-        .type {
-          position: absolute;
-          line-height: 20px;
-          top: 15%;
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: rgba(0, 0, 255, 0.5);
-          border: 1px solid #ffffff;
-          box-shadow: 0 0 0 5px rgba(0, 0, 255, 0.5);
-          padding: 0px 5px;
-          font-size: 10px;
-          color: #ffffff;
-          white-space: nowrap;
-        }
-      }
+      // .f4-item ul li {
+      //   overflow: hidden;
+      //   float: left;
+      //   box-sizing: border-box;
+      //   width: 24%;
+      //   margin-left: 1%;
+      //   border: 1px solid #dcdcdc;
+      //   border-radius: 10px;
+      //   position: relative;
+      //   transition: all 0.6s;
+      //   .type {
+      //     position: absolute;
+      //     line-height: 20px;
+      //     top: 15%;
+      //     left: 50%;
+      //     transform: translateX(-50%);
+      //     background-color: rgba(0, 0, 255, 0.5);
+      //     border: 1px solid #ffffff;
+      //     box-shadow: 0 0 0 5px rgba(0, 0, 255, 0.5);
+      //     padding: 0px 5px;
+      //     font-size: 10px;
+      //     color: #ffffff;
+      //     white-space: nowrap;
+      //   }
+      // }
     }
   }
   .newpei {
@@ -446,8 +358,8 @@ export default {
       flex-direction: row;
       justify-content: space-around;
       margin: 10px 0;
-      img{
-          width: 40%;
+      img {
+        width: 100%;
       }
     }
   }
@@ -476,8 +388,48 @@ export default {
     margin-left: 2.5%;
     img {
       width: 100%;
-      height: 75px;
     }
+  }
+}
+.page-footer {
+  padding-top: 20px;
+  background: #333333;
+  margin-bottom: 60px;
+  .wrapper {
+    width: 90%;
+    margin: 0 auto;
+    .footer {
+      p {
+        color: #ffffff;
+        margin-bottom: 20px;
+        span {
+          margin-left: 20px;
+          vertical-align: middle;
+        }
+        img {
+          width: 80px;
+          height: 40px;
+          margin-left: 20px;
+          vertical-align: middle;
+        }
+      }
+    }
+    .qrcode {
+      img {
+        box-sizing: border-box;
+        padding: 10px;
+        width: 45%;
+      }
+    }
+  }
+  .copyright {
+    background: #222222;
+    height: 36px;
+    text-align: center;
+    color: #999999;
+    line-height: 36px;
+    font-size: 12px;
+    margin-top: 20px;
   }
 }
 </style>

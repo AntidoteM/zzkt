@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="user-center-one" id="logonyes">
-            <img src="http://h5.danengshou.com/img/default-avatar.png" alt="" class="head-portrait" width="100%">
-            <a href="#" class="login-and-registration" id="username">123</a>
+            <img :src="profile_photo?profile_photo:'http://www.gravatar.com/avatar/9fb311b5af6e1e286f3ae32774af477a?s=100'" alt="" class="head-portrait" width="100%">
+            <a href="#" class="login-and-registration" id="username">{{name}}</a>
         </div>
         <div class="module outline-border">
             <ul class="and-grade" id="contentlist">
@@ -34,8 +34,15 @@
                         <i class="iconfont icon-you right-arrow"></i>
                     </div>
                 </router-link>
+                <router-link to="/aboutus" class="apply-for-subsidies tiaozhuan">
+                    <div>
+                        <img src="http://h5.danengshou.com/img/personAlone.png" alt="">&nbsp;&nbsp;
+                        <span class="rapid-development">关于我们</span>
+                        <i class="iconfont icon-you right-arrow"></i>
+                    </div>
+                </router-link>
             </ul>
-            <div class="rapid-development rapid-development-out" id="logOut">
+            <div class="rapid-development rapid-development-out" id="logOut" @click="logout">
                 <i class="iconfont icon-tuichu"></i>&nbsp;&nbsp;退出登录
             </div>
         </div>
@@ -43,16 +50,45 @@
 </template>
 
 <script>
+import user from '../../../App'
+import { removeToken } from '../../../utils/auth.js'
+import { Toast } from 'mint-ui';
+
 export default {
     data(){
         return{
-
+            name: '',
+            profile_photo: ''
+        }
+    },
+    created(){
+        this.$axios.get('/user/show').then((res)=>{
+            console.log(res.data)
+            let userobj = res.data.data
+            user.user = userobj
+            this.name = userobj.name
+            this.profile_photo = userobj.profile_photo
+        }).catch(()=>{
+            Toast({
+                message: '未登录',
+                position: 'bottom'
+            });
+            this.$router.replace({ path: '/login' })
+        })
+    },
+    methods: {
+        logout(){
+            this.$axios.get('/logout').then((res)=>{
+                console.log(res)
+                removeToken()
+                this.$router.replace({ path: '/login' })
+            })
         }
     }
 }
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
     .user-center-one {
         width: 100%;
         height: 150px;

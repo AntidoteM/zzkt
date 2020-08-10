@@ -15,7 +15,7 @@ const routes = [
                 component: () => import('../views/home/home/index')
             },
             {
-                path: '/profile',
+                path: 'profile',
                 name: 'profile',
                 component: () => import('../views/home/profile/index')
             },
@@ -37,6 +37,11 @@ const routes = [
         component: () => import('../views/login/login')
     },
     {
+        path: '/register',
+        name: 'Register',
+        component: () => import('../views/register/register')
+    },
+    {
         path: '/studydata',
         component: () => import('../views/home/profile/studydata/index')
     },
@@ -52,15 +57,29 @@ const routes = [
         path: '/setting',
         component: () => import('../views/home/profile/setting/index')
     },
-	{
-        path: '/Vid_details',
+    {
+        path: '/aboutus',
+        component: () => import('../views/home/profile/aboutus/index')
+    },
+    {
+        path: '/Vid_details/:id',
         name: 'Vid_details',
         component: () => import('../views/pay_video/video_details')
+    },
+	{
+        path: '/news_details/:id',
+        name: 'news_details',
+        component: () => import('../views/home/news/newsdetail')
+    },
+    {
+        path: '/competition/:id',
+        name: 'competition',
+        component: () => import('../views/competition/competition')
     },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

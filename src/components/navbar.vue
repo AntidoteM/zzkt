@@ -40,7 +40,7 @@ export default {
 }
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
     .navbar{
         overflow: hidden;
         background: #2e87ff;
@@ -49,31 +49,31 @@ export default {
         left: 0;
         top: 0;
         z-index: 999;
-    }
-    .page-nav-operate {
-        width: 45px;
-        height: 45px;
-        color: #ffffff;
-        text-align: center;
-        .iconfont {
+        .page-nav-operate {
+            width: 45px;
+            height: 45px;
+            color: #ffffff;
+            text-align: center;
+            .iconfont {
+                font-size: 16px;
+                line-height: 45px;
+            }
+        }
+        .page-nav-back{
+            float: left;
+        }
+        .page-nav-search{
+            float: right;
+        }
+        .title{
+            color: white;
             font-size: 16px;
             line-height: 45px;
+            padding: 0 45px;
+            text-align: center;
         }
     }
-    .page-nav-back{
-        float: left;
-    }
-    .page-nav-search{
-        float: right;
-    }
-    .title{
-        color: white;
-        font-size: 16px;
-        line-height: 45px;
-        padding: 0 45px;
-        text-align: center;
-        background: #2e87ff;
-    }
+    
     // .mint-navbar{
     //     .mint-tab-item {
     //         padding: 17px 0;

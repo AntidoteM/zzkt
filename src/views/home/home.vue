@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- <NavBar v-slot:title></NavBar> -->
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <TabBar />
   </div>
 </template>
@@ -22,7 +24,7 @@ export default {
 }
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 router-view{
   max-height: calc(100%-60px);
 }

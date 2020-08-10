@@ -9,28 +9,37 @@
         <mt-tab-container v-model="selected">
             
             <mt-tab-container-item id="1">
-                <div class="lable">第二届全国新能源汽车关键技术技能大赛培训资源</div>
-                <!-- <mt-cell v-for="n in 10" :title="'content ' + n" :key="n"/> -->
-                <div class="center_box" v-for="n in 10" :key="n" @click="to_videil">
-                    <div class="img_box">
-                        <img class="img" src="../../../assets/img/1592992583(1).jpg" alt="">
-                    </div>
-                    <div>
-                        <div class="title">动力电池PACK装调与检测</div>
-                        <div class="hour">共2个课时</div>
+                <div v-for="(item,index) in cate" :key="index">
+                    <div class="lable">{{item.name}}</div>
+                    <div v-for="(sonitem,sonindex) in item.son" :key="sonindex">
+                        <div class="type">{{sonitem.name}}</div>
+                        <div class="center_box" v-for="(son2item,son2index) in sonitem.son" :key="son2index" @click="to_videil(son2item.id)">
+                            <div class="img_box">
+                                <img class="img" :src="son2item.img_src" alt="">
+                            </div>
+                            <div>
+                                <div class="title">{{son2item.title}}</div>
+                                <div class="hour">共{{son2item.video_count}}个课时</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </mt-tab-container-item>
+
             <mt-tab-container-item id="2">
-                <div class="lable">无人装机调检修工</div>
-                <!-- <mt-cell v-for="n in 4" :title="'content ' + n" :key="n"/> -->
-                <div class="center_box" v-for="n in 10" :key="n">
-                    <div class="img_box">
-                        <img class="img" src="../../../assets/img/1592992583(1).jpg" alt="">
-                    </div>
-                    <div>
-                        <div class="title">动力电池PACK装调与检测</div>
-                        <div class="hour">共2个课时</div>
+                <div v-for="(item,index) in newcate" :key="index">
+                    <div class="lable">{{item.name}}</div>
+                    <div v-for="(sonitem,sonindex) in item.son" :key="sonindex">
+                        <div class="type">{{sonitem.name}}</div>
+                        <div class="center_box" v-for="(son2item,son2index) in sonitem.son" :key="son2index" @click="to_videil(son2item.id)">
+                            <div class="img_box">
+                                <img class="img" :src="son2item.img_src" alt="">
+                            </div>
+                            <div>
+                                <div class="title">{{son2item.title}}</div>
+                                <div class="hour">共{{son2item.video_count}}个课时</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </mt-tab-container-item>
@@ -44,7 +53,9 @@ import {Navbar, TabItem, TabContainer, TabContainerItem, Cell} from "mint-ui"
 export default {
     data(){
         return{
-            selected: '1'
+            selected: '1',
+            cate:[],
+            newcate:[]
         }
     },
     components:{
@@ -54,16 +65,23 @@ export default {
         [TabContainer.name]: TabContainer,
         [Cell.name]: Cell
     },
+    created(){
+        this.$axios.get('/train').then((res)=>{
+            let data = res.data.data
+            this.cate = data.cate
+            this.newcate = data.newscate
+            console.log(data)
+        })
+    },
     methods: {
-        to_videil(){
-            
-            this.$router.push("/Vid_details")
+        to_videil(id){
+            this.$router.push({path: `/Vid_details/${id}`})
         }
     }
 }
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
     .tab_top{
         .mint-navbar{
              background: url(http://h5.danengshou.com/img/logo_bg.png) no-repeat top center;
@@ -79,6 +97,12 @@ export default {
     }
    
       .mint-tab-container-wrap{
+          margin-bottom: 60px;
+          .type{
+              padding: 10px;
+              text-align: center;
+              font-size: 14px;
+          }
            .lable{
                   position: relative;
                   left: 3.3%;

@@ -43,7 +43,7 @@ export default {
 }
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 .page-tabbar{
   bottom: 0;
   display: -webkit-box;

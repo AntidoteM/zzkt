@@ -1,9 +1,9 @@
 <template>
   <div class="page-logon">
     <section class="logon_navbar">
-      <a href="#" class="page-nav-operate page-nav-back">
+      <div class="page-nav-operate page-nav-back" @click="back">
         <i class="iconfont icon-fanhui"></i>
-      </a>
+      </div>
       <h3 class="page-nav-title" style="font-size: 20px;">登录</h3>
     </section>
     <div class="logon_main">
@@ -11,33 +11,36 @@
         <img class="img-responsive" src="http://h5.danengshou.com/img/logo.png" width="50" height="50" alt />
         <form class="logon_form">
           <div class="logon_form-wrapper">
-            <label class="logon_form-label" for>账号</label>
+            <label class="logon_form-label">手机号</label>
             <input
               class="logon_form-input"
               type="text"
               id="login_phone"
-              placeholder="请输入手机号/账号/身份证号"
-              value
-            />
-            <span class="logon_iconfont clear_btn">
+              placeholder="请输入手机号"
+              v-model="phone"
+              />
+            <span class="logon_iconfont clear_btn" @click="phone=''">
               <i class="iconfont icon-cuowu"></i>
             </span>
           </div>
           <div class="logon_form-wrapper">
             <label class="logon_form-label" for>密码</label>
-            <input class="logon_form-input" type="password" id="pass" placeholder="请输入密码" value />
-            <span class="logon_iconfont">
+            <input class="logon_form-input" :type="show" id="pass" placeholder="请输入密码" v-model="password" />
+            <span class="logon_iconfont" v-if="show=='password'" @click="show='text'">
               <i class="iconfont icon-yincangmima"></i>
+            </span>
+            <span class="logon_iconfont" v-if="show=='text'" @click="show='password'">
+              <i class="iconfont icon-yanjing"></i>
             </span>
           </div>
           <div class="logon_forget-register">
-            <span class="logon_forget j_logon_forget">忘记密码</span>
+            <!-- <span class="logon_forget j_logon_forget">忘记密码</span> -->
             <span class="logon_register">
-              <a href="register.html">立即注册</a>
+              <router-link to="/register">立即注册</router-link>
             </span>
           </div>
           <div class="logon_signin">
-            <input class="logon_form-input logon_button" type="button" value="登录" />
+            <input class="logon_form-input logon_button" type="button" value="登录" @click="login"/>
           </div>
         </form>
       </div>
@@ -49,19 +52,58 @@
 </template>
 
 <script>
+import { Toast } from 'mint-ui'
+import { setToken } from '../../utils/auth.js'
 export default {
   data() {
     return {
-      username: "",
-      password: ""
+      phone: "",
+      password: "",
+      show: 'password'
     };
   },
+  created(){
+    console.log(this.$router.history)
+  },
   methods: {
+    back(){
+      this.$router.go(-1)
+    },
+    login(){
+      const {phone,password} = this
+      const test = /^1[345678][0-9]{9}$/
+      if(!test.test(phone)){
+        Toast({
+          message: '手机号不符合',
+          position: 'bottom'
+        })
+        return
+      }
+      if(password.length<6){
+        Toast({
+          message: '密码长度不符合',
+          position: 'bottom'
+        })
+        return
+      }
+      this.$axios.post('/user/login',{phone,password}).then((res)=>{
+        console.log(res.data)
+        if(res.data.status==200){
+          setToken(res.data.access_token)
+          this.$router.replace({ path: '/profile' })
+        }else{
+          Toast({
+            message: res.data.msg,
+            position: 'bottom'
+          })
+        }
+      })
+    }
   }
 };
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 .page-logon {
   position: absolute;
   left: 0;
