@@ -4,13 +4,13 @@
       <div slot="title">关于我们</div>
     </nav-bar>
     <div class="page-container">
-      <p>公司简介</p>
+      <p>平台简介</p>
       <div v-html="about.content"></div>
       <p>联系我们</p>
       <ul>
-          <li>培训地址：{{about.address}}</li>
-          <li>联系人员：{{about.name}}</li>
-          <li>联系手机：{{about.phone}}</li>
+          <li>联系地址：{{about.address}}</li>
+          <li>联系单位：{{about.name}}</li>
+          <li>联系电话：{{about.phone}}</li>
           <li>联系邮编：{{about.postcode}}</li>
           <li>联系邮箱：{{about.email}}</li>
           <li>联系微信：{{about.wechat}}</li>

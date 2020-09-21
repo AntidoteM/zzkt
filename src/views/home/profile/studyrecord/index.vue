@@ -10,7 +10,7 @@
                         <img style="width: 200px;display: block;margin: 0 auto;" src="http://www.danengshou.com/img/empty.png" />
                         <span style="text-align: center;display: block;margin-top: 10px;font-size: 11px;">暂无学习记录！</span>
                     </div>
-                    <div class="item" v-for="(item, index) in list" :key="index" @click="todetail(item.video.cid)">
+                    <div class="item" v-for="(item,index) in list" :key="index" @click="todetail(item.video.cid)">
                         <img :src="item.video.img_src" alt="">
                         <span>{{item.video.title}}</span>
                     </div>
@@ -35,7 +35,8 @@ export default {
     created(){
         this.$axios.get('/user/studyrecord').then((res)=>{
             this.list = res.data.data.data
-            console.log(res.data.data)
+            this.list = this.list.filter((item)=>{return item.video})
+            console.log(this.list)
         })
     },
     components: {

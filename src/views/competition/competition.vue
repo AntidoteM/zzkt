@@ -13,12 +13,12 @@
         <p v-html="game.content"></p>
       </div>
       <div id="classify" class="classify item">
-        <div class="title">比赛分类</div>
+        <div class="title">大赛赛项</div>
         <div class="classify-content">
           <div class="swiper-container-classify">
             <swiper :options="classifyOptions" class="swiper-wrapper">
               <swiper-slide class="swiper-slide" v-for="(item,index) in gamecate" :key="index">
-                <img style="width:100%" :src="item.img_src" />
+                <img style="width:100%;height:80px;" :src="item.img_src" />
                 <p>{{item.name}}</p>
               </swiper-slide>
             </swiper>
@@ -34,7 +34,7 @@
             <div id="gallery">
               <swiper :options="gallerySwiper" ref="gallerySwiper" class="swiper-wrapper">
                 <swiper-slide class="swiper-slide" v-for="(item,index) in img_text" :key="index">
-                  <img style="width:100%" :src="item.img_src" />
+                  <img style="width:100%;height:200px;" :src="item.img_src" />
                 </swiper-slide>
               </swiper>
             </div>
@@ -63,7 +63,7 @@
           <div class="swiper swiper-container-momenttop">
             <swiper :options="momenttopswiper" class="swiper-wrapper">
               <swiper-slide class="swiper-slide" v-for="(item,index) in top" :key="index">
-                <img style="width:100%" :src="item.img_src" />
+                <img style="width:100%;height:100px;" :src="item.img_src" />
                 <p>{{item.title}}</p>
               </swiper-slide>
             </swiper>
@@ -75,7 +75,7 @@
           <div class="swiper swiper-container-momentbottom">
             <swiper :options="momentbottomswiper" class="swiper-wrapper">
               <swiper-slide class="swiper-slide" v-for="(item,index) in bottom" :key="index">
-                <img style="width:100%" :src="item.img_src" />
+                <img style="width:100%;height:100px;" :src="item.img_src" />
                 <p>{{item.title}}</p>
               </swiper-slide>
             </swiper>
@@ -85,7 +85,7 @@
         </div>
       </div>
       <div id="history" class="history item">
-        <div class="title">往届比赛</div>
+        <div class="title">其他比赛</div>
         <div class="history-content">
           <img v-for="(item, index) in other" :key="index" width="100%" :src="item.img_src" />
         </div>
@@ -243,7 +243,7 @@ export default {
   }
   .right {
     width: 100%;
-    padding: 40px 20px;
+    padding: 20px;
     box-sizing: border-box;
     .title {
       font-size: 20px;

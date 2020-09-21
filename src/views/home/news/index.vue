@@ -13,28 +13,31 @@
         <mt-cell
           class="text_item"
           v-for="(item,index) in dynamic"
-          :title="item.title"
           :key="index"
           v-on:click.native="toDetail(item.id)"
-        />
+        >
+          <div class="title">{{item.title}}</div>
+        </mt-cell>
       </mt-tab-container-item>
       <mt-tab-container-item class="text_list" id="2">
         <mt-cell
           class="text_item"
           v-for="(item,index) in inform"
-          :title="item.title"
           :key="index"
           v-on:click.native="toDetail(item.id)"
-        />
+        >
+          <div class="title">{{item.title}}</div>
+        </mt-cell>
       </mt-tab-container-item>
       <mt-tab-container-item class="text_list" id="3">
         <mt-cell
           class="text_item"
           v-for="(item,index) in skill"
-          :title="item.title"
           :key="index"
           v-on:click.native="toDetail(item.id)"
-        />
+        >
+          <div class="title">{{item.title}}</div>
+        </mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -78,27 +81,28 @@ export default {
 <style lang="less" scoped>
 .tab_top {
   .mint-navbar {
-    background: url(http://h5.danengshou.com/img/logo_bg.png) no-repeat top
-      center;
     .is-selected {
-      color: #fff;
+      color: #0099ff;
     }
   }
 }
 .center_box {
+  margin-bottom: 60px;
   .text_list {
     .text_item {
       background: url(http://gaosaiedu.com/home/img/arrows.svg) no-repeat top
         left;
-      background-position: 5% 57%;
+      background-position: 5% 50%;
       background-size: 4% 40%;
       padding: 0 25px;
-      .mint-cell-wrapper {
-        .mint-cell-title {
-            margin-left: 20px;
-          text-indent: 6%;
-          color: #999;
-        }
+      border-bottom: 1px solid #eeeeee;
+      .title {
+        font-size: 14px;
+        width: calc(100vw - 50px);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        color: #000000;
       }
     }
   }

@@ -8,13 +8,13 @@
     </section>
     <div class="logon_main">
       <div class="logon_container">
-        <img
+        <!-- <img
           class="img-responsive"
           src="http://h5.danengshou.com/img/logo.png"
           width="50"
           height="50"
           alt
-        />
+        />-->
         <div class="logon_form">
           <div class="logon_form-wrapper">
             <label class="logon_form-label" for>手机号</label>
@@ -63,14 +63,14 @@
       </div>
     </div>
     <div class="logon_text">
-      <span class="text">技能大师在线培训平台</span>
+      <span class="text">智造课堂</span>
     </div>
   </div>
 </template>
 
 <script>
 import { Toast } from "mint-ui";
-import { setToken } from '../../utils/auth.js'
+import { setToken } from "../../utils/auth.js";
 export default {
   data() {
     return {
@@ -107,23 +107,26 @@ export default {
         });
         return;
       }
-      this.$axios.post("/user/add", { phone, code, password }).then((res) => {
-        if (res.data.status == 200) {
+      this.$axios
+        .post("/user/add", { phone, code, password })
+        .then((res) => {
+          if (res.data.status == 200) {
+            Toast({
+              message: "注册成功",
+              position: "bottom",
+            });
+            setToken(res.data.access_token);
+            this.$router.replace({ path: "/profile" });
+          } else {
+            console.log(res);
+          }
+        })
+        .catch(() => {
           Toast({
-            message: "注册成功",
+            message: "手机号已存在",
             position: "bottom",
           });
-          setToken(res.data.access_token)
-          this.$router.replace({ path: '/profile' })
-        }else{
-          console.log(res)
-        }
-      }).catch(()=>{
-        Toast({
-            message: '手机号已存在',
-            position: "bottom",
-          });
-      });
+        });
     },
   },
 };

@@ -1,19 +1,7 @@
 <template>
   <div>
     <div class="page-navbar page-index-navbar">
-      <img
-        src="http://h5.danengshou.com/img/logo.png"
-        width="30"
-        height="30"
-        alt
-        style="margin-left: 5px;position: absolute;left: 5px;top: 8px;"
-      />
       <h3 class="page-nav-title">
-        <!-- <div class="search">
-          <form action>
-            <input type="text" class="sreachs" id placeholder="请输入要搜索的内容" />
-          </form>
-        </div> -->
         <div>智造课堂</div>
       </h3>
     </div>
@@ -21,7 +9,7 @@
       <div class="module-top">
         <div class="swiper-container">
           <swiper :options="swiperOptions">
-            <swiper-slide v-for="(item,index) in banners" :key="index">
+            <swiper-slide v-for="(item,index) in banners" :key="'bannar'+index">
               <div class="pic">
                 <a :href="item.links">
                   <img :src="item.img_src" alt />
@@ -34,58 +22,64 @@
       </div>
       <div class="module">
         <div class="racelist">
-          <div v-for="(item,index) in games" :key="index" @click="togame(item.id)">
+          <div v-for="(item,index) in games" :key="'race'+index" @click="togame(item.id)">
             <img :src="item.img_src" />
           </div>
         </div>
       </div>
-      <hr />
       <div class="news b">
-        <div class="title">新闻动态</div>
+        <div class="title">信息发布</div>
         <ul class="list">
-          <li v-for="(item, index) in articles" :key='index' @click="tonewsdetail(item.id)">
+          <li v-for="(item, index) in articles" :key='"news"+index' @click="tonewsdetail(item.id)">
             <img :src="item.img_src" />
             <div class="info">
               <p class="title">{{item.title}}</p>
               <span class="type">{{item.cate.name}}</span>
-              <span class="time">{{item.updated_at | date}}</span>
+              <span class="time">{{item.updated_at}}</span>
             </div>
           </li>
         </ul>
       </div>
-      <hr />
       <div class="curriculum">
         <div class="title">赛前培训</div>
         <div class="list" style="padding-top: 10px">
-          <div class="item" v-for="(item,index) in cates" :key="index">
-            <div class="stitle">
-              {{item.name}}
-              <a href='' class="more" @click="toclasses">更多视频&gt;&gt;</a>
-            </div>
-            <ul>
-              <li v-for="(sonitem,sonindex) in item.son" :key="sonindex">
-                <div v-for="(son2item,son2index) in sonitem.son" :key="son2index" @click="tovideodetail(son2item.id)">
-                  <div class="type">{{sonitem.name}}</div>
-                  <img :src="son2item.img_src" />
-                  <div class="content">
-                    <p>{{son2item.title}}</p>
-                    <span>共{{son2item.video_count}}课时</span>
-                  </div>
-                </div>
-              </li>
-              <div class="clr"></div>
-            </ul>
+          <div class="item" v-for="(item,index) in cates" :key="'list'+index">
+            <template v-if="item.son.length>0">
+              <div class="stitle">
+                {{item.name}}
+                <router-link :to="{path: '/classes'}">更多视频&gt;&gt;</router-link>
+              </div>
+              <ul>
+                  <li v-for="(sonitem) in item.son" :key="sonitem.id" @click="toclasseslist(sonitem.id)">
+                    <div>
+                      <div class="type">{{clear(sonitem.name)}}</div>
+                      <img :src="sonitem.img_src" />
+                      <div class="content">
+                        <p v-html="format(sonitem.name)"></p>
+                        <span>共{{sonitem.video_count}}课时</span>
+                      </div>
+                    </div>
+                  </li>
+                  <div class="clr"></div>
+              </ul>
+            </template>
           </div>
         </div>
       </div>
-      <hr />
       <div class="newpei b">
         <div class="title">新职业培训</div>
-        <div class="list">
-          <a href="" v-for="(item,index) in newscates" :key="index" style="display: inline-block;width: 40%;">
-            <img :src="item.img_src" />
-          </a>
-        </div>
+        <ul class="list">
+          <li v-for="(item,index) in newscates" :key="'newpei'+index">
+            <div>
+              <div class="type">{{clear(item.name)}}</div>
+              <img :src="item.img_src" />
+              <div class="content">
+                <p v-html="format(item.name)"></p>
+                <span>共{{item.video_count}}课时</span>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="page-footer">
@@ -131,15 +125,6 @@ export default {
       }
     })
   },
-  filters: {
-    date: function(value){
-      let date = new Date(value)
-      let year = date.getFullYear()
-      let month = date.getMonth()+1
-      let day = date.getDay()
-      return year+'-'+month+'-'+day
-    }
-  },
   methods: {
     toclasses(){
       this.$router.push({path: '/classes'})
@@ -147,11 +132,17 @@ export default {
     togame(id){
       this.$router.push({path:`/competition/${id}`})
     },
-    tovideodetail(id){
-      this.$router.push({path: `/Vid_details/${id}`})
+    toclasseslist(id){
+      this.$router.push({path: `/classeslist/${id}`})
     },
     tonewsdetail(id){
       this.$router.push({path: `/news_details/${id}`})
+    },
+    clear(text){
+      return text.slice(text.indexOf('（')+1,text.indexOf('）'));
+    },
+    format(text){
+      return text.slice(0,text.indexOf('（'))+'<p>'+text.slice(text.indexOf('（'),text.indexOf('）')+1)+'</p>'
     }
   },
 };
@@ -219,33 +210,44 @@ export default {
     }
   }
   .news {
+    margin-top: 10px;
     ul {
       li {
         padding-top: 10px;
         img {
           width: 100px;
+          height: 70px;
           vertical-align: middle;
         }
         .info {
-          padding: 10px;
+          padding-left: 10px;
           display: inline-block;
           width: calc(100% - 100px);
+          height: 70px;
           box-sizing: border-box;
           vertical-align: middle;
         }
         .time {
-          color: #000000;
-          margin-left: 100px;
+          float: right;
+          font-size: 10px;
+          color: #9baab6;
         }
         .title {
+          color: #31424e;
+          height: 36px;
           font-size: 16px;
           font-weight: bold;
+          overflow : hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
         }
         span {
           display: inline-block;
           margin-top: 10px;
           font-size: 14px;
-          color: #007aff;
+          color: #9baab6;
         }
       }
     }
@@ -272,7 +274,8 @@ export default {
       .stitle {
         padding-bottom: 2px;
         border-bottom: 1px solid #269abc;
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: bold;
         a {
           font-size: 12px;
           float: right;
@@ -280,14 +283,16 @@ export default {
         }
       }
       ul {
+        display: flex;
+        flex-wrap: wrap;
         width: 100%;
         margin: 10px 0;
         li {
           overflow: hidden;
           float: left;
           box-sizing: border-box;
-          width: 45.5%;
-          margin-left: 3%;
+          width: 48%;
+          margin-left: 1%;
           margin-bottom: 10px;
           border: 1px solid #dcdcdc;
           border-radius: 10px;
@@ -307,7 +312,7 @@ export default {
           }
           img {
             width: 100%;
-            height: 82px;
+            height: 100px;
           }
           .content {
             padding: 5px;
@@ -315,9 +320,14 @@ export default {
             font-size: 7px;
             p {
               color: #000000;
-              font-size: 9px;
-              padding-bottom: 5px;
+              font-size: 10px;
+              height: 26px;
               font-weight: bold;
+              overflow : hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
             }
           }
         }
@@ -325,31 +335,6 @@ export default {
           clear: both;
         }
       }
-      // .f4-item ul li {
-      //   overflow: hidden;
-      //   float: left;
-      //   box-sizing: border-box;
-      //   width: 24%;
-      //   margin-left: 1%;
-      //   border: 1px solid #dcdcdc;
-      //   border-radius: 10px;
-      //   position: relative;
-      //   transition: all 0.6s;
-      //   .type {
-      //     position: absolute;
-      //     line-height: 20px;
-      //     top: 15%;
-      //     left: 50%;
-      //     transform: translateX(-50%);
-      //     background-color: rgba(0, 0, 255, 0.5);
-      //     border: 1px solid #ffffff;
-      //     box-shadow: 0 0 0 5px rgba(0, 0, 255, 0.5);
-      //     padding: 0px 5px;
-      //     font-size: 10px;
-      //     color: #ffffff;
-      //     white-space: nowrap;
-      //   }
-      // }
     }
   }
   .newpei {
@@ -358,9 +343,50 @@ export default {
       flex-direction: row;
       justify-content: space-around;
       margin: 10px 0;
-      img {
-        width: 100%;
-      }
+      li {
+          overflow: hidden;
+          float: left;
+          box-sizing: border-box;
+          width: 48%;
+          margin-left: 1%;
+          margin-bottom: 10px;
+          border: 1px solid #dcdcdc;
+          border-radius: 10px;
+          position: relative;
+          transition: all 0.6s;
+          .type {
+            position: absolute;
+            line-height: 20px;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 255, 0.5);
+            padding: 0px 5px;
+            font-size: 10px;
+            color: #ffffff;
+            white-space: nowrap;
+            text-align: left;
+          }
+          img {
+            width: 100%;
+            height: 100px;
+          }
+          .content {
+            padding: 5px;
+            color: #9d9d9d;
+            font-size: 7px;
+            p {
+              color: #000000;
+              font-size: 10px;
+              height: 36px;
+              font-weight: bold;
+              overflow : hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+            }
+          }
+        }
     }
   }
 }
@@ -375,6 +401,7 @@ export default {
       img {
         border-radius: 20px;
         width: 100%;
+        height: 200px;
       }
     }
   }
@@ -388,6 +415,7 @@ export default {
     margin-left: 2.5%;
     img {
       width: 100%;
+      height: 80px;
     }
   }
 }

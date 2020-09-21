@@ -8,7 +8,7 @@
     </section>
     <div class="logon_main">
       <div class="logon_container">
-        <img class="img-responsive" src="http://h5.danengshou.com/img/logo.png" width="50" height="50" alt />
+        <!-- <img class="img-responsive" src="http://h5.danengshou.com/img/logo.png" width="50" height="50" alt /> -->
         <form class="logon_form">
           <div class="logon_form-wrapper">
             <label class="logon_form-label">手机号</label>
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="logon_text">
-      <span class="text">技能大师在线培训平台</span>
+      <span class="text">智造课堂</span>
     </div>
   </div>
 </template>

@@ -76,6 +76,11 @@ const routes = [
         name: 'competition',
         component: () => import('../views/competition/competition')
     },
+    {
+        path: '/classeslist/:id',
+        name: 'classeslist',
+        component: () => import('../views/home/classes/classes.vue')
+    },
 ]
 
 const router = new VueRouter({
